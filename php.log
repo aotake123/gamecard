@@ -1329,3 +1329,565 @@
 
 [01-May-2019 17:28:20 Asia/Tokyo] デバッグ：対局者情報を取得します。
 [01-May-2019 17:28:20 Asia/Tokyo] デバッグ：クエリ成功。
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：「「「「「「「「「「「「「「「「「「「「「「「「「「
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：マイページ
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：「「「「「「「「「「「「「「「「「「「「「「「「「「
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>画面表示処理開始
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：セッションID：pob4e81mq9c5id7k2l8hvlle8f
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：セッション変数の中身：Array
+(
+    [login_date] => 1556699300
+    [login_limit] => 2592000
+    [user_id] => 7
+)
+
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：現在日時タイムスタンプ：1556699542
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：ログイン期限日時タイムスタンプ：1559291300
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：ログイン済ユーザーです
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：ログイン有効期限内です
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：自分だけの対局件数を取得します
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：ユーザーID：7
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：クエリ成功。
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：自分だけの対局勝利件数を取得します
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：ユーザーID：7
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：クエリ成功。
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：クエリ中身勝利件数：PDOStatement Object
+(
+    [queryString] => SELECT * FROM game WHERE g_black = :u_id AND g_result = 1 AND delete_flg = 0
+                OR g_white = :u_id AND g_result = 1 AND delete_flg = 0
+)
+
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：自分だけの棋力を取得します
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：ユーザーID：7
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：クエリ成功。
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：クエリ中身棋力：PDOStatement Object
+(
+    [queryString] => SELECT * FROM users AS u
+        INNER JOIN power AS p ON u.power = p.power_id
+        WHERE id = :u_id
+)
+
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：棋力データ：Array
+(
+    [0] => Array
+        (
+            [id] => 7
+            [id2] => 0
+            [usersei] => 東島
+            [username] => 信一郎
+            [userseiname] => 東島信一郎
+            [sex] => 1
+            [m_id] => 
+            [email] => tasukuoki10@gmail.com
+            [pass] => $2y$10$Fxi7VwKTF8T6gwysSZtQku7T7PGZw4./WullQ/lpcZUM6dRdjFuyS
+            [groupname] => 1
+            [power] => 8
+            [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+            [delete_flg] => 0
+            [create_date] => 2019-04-15 00:00:00
+            [update_date] => 2019-04-15 18:48:37
+            [power_id] => 8
+            [power_data] => 13級
+        )
+
+)
+
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：自分だけの対局情報を取得します
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：ユーザーID：7
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：対局件数や中身などいろいろな情報を取得します。
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：クエリ成功。
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：SQL：SELECT * FROM game AS g
+            LEFT JOIN users AS u1 ON g.g_black = u1.id
+            LEFT JOIN users2 AS u2 ON g.g_white = u2.id
+            INNER JOIN power AS p ON g.b_power = p.power_id
+            INNER JOIN power2 AS p2 ON g.w_power = p2.power_id2
+            INNER JOIN teai AS t ON g.g_teai = t.teai_id
+            INNER JOIN time AS ti ON g.g_time = ti.time_id
+            LEFT JOIN result AS r ON g.g_result = r.result_id
+            LEFT JOIN winHow AS w ON g.g_winHow = w.winHow_id
+            WHERE g_black = :u_id OR g_white = :u_id
+            ORDER BY g_year DESC,g_month DESC,g_date DESC,g_time DESC
+             LIMIT 10 OFFSET 0
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：クエリ成功。
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：対局データ：Array
+(
+    [total] => 45
+    [total_page] => 5
+    [data] => Array
+        (
+            [0] => Array
+                (
+                    [g_id] => 51
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 30
+                    [g_time] => 4
+                    [g_white] => 7
+                    [w_power] => 14
+                    [g_black] => 10
+                    [b_power] => 23
+                    [g_teai] => 9
+                    [g_result] => 1
+                    [g_winHow] => 1
+                    [g_winHow_moku] => 
+                    [user_id] => 7
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:22:40
+                    [id] => 7
+                    [id2] => 0
+                    [usersei] => 浦川
+                    [username] => 瞬
+                    [userseiname] => 浦川瞬
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => 
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 23
+                    [pic] => uploads/1427dde15f3656e8a30549779faffa9d861b68e6.jpeg
+                    [userseiname2] => 東島信一郎
+                    [power_id] => 23
+                    [power_data] => 三段
+                    [power_id2] => 14
+                    [power_data2] => 7級
+                    [teai_id] => 9
+                    [teai_data] => 8子
+                    [komi] => 0
+                    [time_id] => 4
+                    [time_data] => 14:00
+                    [result_id] => 1
+                    [result_data] => ◯ ー ×
+                    [winHow_id] => 1
+                    [winHow_data] => 中押し
+                )
+
+            [1] => Array
+                (
+                    [g_id] => 48
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 30
+                    [g_time] => 4
+                    [g_white] => 14
+                    [w_power] => 16
+                    [g_black] => 7
+                    [b_power] => 14
+                    [g_teai] => 3
+                    [g_result] => 1
+                    [g_winHow] => 2
+                    [g_winHow_moku] => 8
+                    [user_id] => 14
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:23:07
+                    [id] => 14
+                    [id2] => 0
+                    [usersei] => 東島
+                    [username] => 信一郎
+                    [userseiname] => 東島信一郎
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => tasukuoki6@gmail.com
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 8
+                    [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+                    [userseiname2] => 鶴岡丈志
+                    [power_id] => 14
+                    [power_data] => 7級
+                    [power_id2] => 16
+                    [power_data2] => 5級
+                    [teai_id] => 3
+                    [teai_data] => 2子
+                    [komi] => 0
+                    [time_id] => 4
+                    [time_data] => 14:00
+                    [result_id] => 1
+                    [result_data] => ◯ ー ×
+                    [winHow_id] => 2
+                    [winHow_data] => 目差
+                )
+
+            [2] => Array
+                (
+                    [g_id] => 47
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 29
+                    [g_time] => 1
+                    [g_white] => 11
+                    [w_power] => 3
+                    [g_black] => 7
+                    [b_power] => 14
+                    [g_teai] => 10
+                    [g_result] => 2
+                    [g_winHow] => 1
+                    [g_winHow_moku] => 
+                    [user_id] => 11
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:22:40
+                    [id] => 11
+                    [id2] => 0
+                    [usersei] => 東島
+                    [username] => 信一郎
+                    [userseiname] => 東島信一郎
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => 
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 8
+                    [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+                    [userseiname2] => 井上侑也
+                    [power_id] => 14
+                    [power_data] => 7級
+                    [power_id2] => 3
+                    [power_data2] => 18級
+                    [teai_id] => 10
+                    [teai_data] => 9子
+                    [komi] => 0
+                    [time_id] => 1
+                    [time_data] => 13:30
+                    [result_id] => 2
+                    [result_data] => × ー ◯
+                    [winHow_id] => 1
+                    [winHow_data] => 中押し
+                )
+
+            [3] => Array
+                (
+                    [g_id] => 34
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 17
+                    [g_time] => 3
+                    [g_white] => 8
+                    [w_power] => 3
+                    [g_black] => 7
+                    [b_power] => 2
+                    [g_teai] => 2
+                    [g_result] => 1
+                    [g_winHow] => 3
+                    [g_winHow_moku] => 
+                    [user_id] => 7
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:23:07
+                    [id] => 8
+                    [id2] => 0
+                    [usersei] => 東島
+                    [username] => 信一郎
+                    [userseiname] => 東島信一郎
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => 
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 8
+                    [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+                    [userseiname2] => 大木輔
+                    [power_id] => 2
+                    [power_data] => 19級
+                    [power_id2] => 3
+                    [power_data2] => 18級
+                    [teai_id] => 2
+                    [teai_data] => 定先
+                    [komi] => 0
+                    [time_id] => 3
+                    [time_data] => 13:45
+                    [result_id] => 1
+                    [result_data] => ◯ ー ×
+                    [winHow_id] => 3
+                    [winHow_data] => 時間切れ
+                )
+
+            [4] => Array
+                (
+                    [g_id] => 26
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 17
+                    [g_time] => 3
+                    [g_white] => 8
+                    [w_power] => 3
+                    [g_black] => 7
+                    [b_power] => 2
+                    [g_teai] => 2
+                    [g_result] => 1
+                    [g_winHow] => 3
+                    [g_winHow_moku] => 
+                    [user_id] => 7
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:23:07
+                    [id] => 8
+                    [id2] => 0
+                    [usersei] => 東島
+                    [username] => 信一郎
+                    [userseiname] => 東島信一郎
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => 
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 8
+                    [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+                    [userseiname2] => 大木輔
+                    [power_id] => 2
+                    [power_data] => 19級
+                    [power_id2] => 3
+                    [power_data2] => 18級
+                    [teai_id] => 2
+                    [teai_data] => 定先
+                    [komi] => 0
+                    [time_id] => 3
+                    [time_data] => 13:45
+                    [result_id] => 1
+                    [result_data] => ◯ ー ×
+                    [winHow_id] => 3
+                    [winHow_data] => 時間切れ
+                )
+
+            [5] => Array
+                (
+                    [g_id] => 18
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 17
+                    [g_time] => 3
+                    [g_white] => 8
+                    [w_power] => 3
+                    [g_black] => 7
+                    [b_power] => 2
+                    [g_teai] => 2
+                    [g_result] => 1
+                    [g_winHow] => 3
+                    [g_winHow_moku] => 
+                    [user_id] => 7
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:23:07
+                    [id] => 8
+                    [id2] => 0
+                    [usersei] => 東島
+                    [username] => 信一郎
+                    [userseiname] => 東島信一郎
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => 
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 8
+                    [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+                    [userseiname2] => 大木輔
+                    [power_id] => 2
+                    [power_data] => 19級
+                    [power_id2] => 3
+                    [power_data2] => 18級
+                    [teai_id] => 2
+                    [teai_data] => 定先
+                    [komi] => 0
+                    [time_id] => 3
+                    [time_data] => 13:45
+                    [result_id] => 1
+                    [result_data] => ◯ ー ×
+                    [winHow_id] => 3
+                    [winHow_data] => 時間切れ
+                )
+
+            [6] => Array
+                (
+                    [g_id] => 37
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 17
+                    [g_time] => 3
+                    [g_white] => 8
+                    [w_power] => 3
+                    [g_black] => 7
+                    [b_power] => 2
+                    [g_teai] => 2
+                    [g_result] => 1
+                    [g_winHow] => 3
+                    [g_winHow_moku] => 
+                    [user_id] => 7
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:23:07
+                    [id] => 8
+                    [id2] => 0
+                    [usersei] => 東島
+                    [username] => 信一郎
+                    [userseiname] => 東島信一郎
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => 
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 8
+                    [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+                    [userseiname2] => 大木輔
+                    [power_id] => 2
+                    [power_data] => 19級
+                    [power_id2] => 3
+                    [power_data2] => 18級
+                    [teai_id] => 2
+                    [teai_data] => 定先
+                    [komi] => 0
+                    [time_id] => 3
+                    [time_data] => 13:45
+                    [result_id] => 1
+                    [result_data] => ◯ ー ×
+                    [winHow_id] => 3
+                    [winHow_data] => 時間切れ
+                )
+
+            [7] => Array
+                (
+                    [g_id] => 29
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 17
+                    [g_time] => 3
+                    [g_white] => 8
+                    [w_power] => 3
+                    [g_black] => 7
+                    [b_power] => 2
+                    [g_teai] => 2
+                    [g_result] => 1
+                    [g_winHow] => 3
+                    [g_winHow_moku] => 
+                    [user_id] => 7
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:23:07
+                    [id] => 8
+                    [id2] => 0
+                    [usersei] => 東島
+                    [username] => 信一郎
+                    [userseiname] => 東島信一郎
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => 
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 8
+                    [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+                    [userseiname2] => 大木輔
+                    [power_id] => 2
+                    [power_data] => 19級
+                    [power_id2] => 3
+                    [power_data2] => 18級
+                    [teai_id] => 2
+                    [teai_data] => 定先
+                    [komi] => 0
+                    [time_id] => 3
+                    [time_data] => 13:45
+                    [result_id] => 1
+                    [result_data] => ◯ ー ×
+                    [winHow_id] => 3
+                    [winHow_data] => 時間切れ
+                )
+
+            [8] => Array
+                (
+                    [g_id] => 21
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 17
+                    [g_time] => 3
+                    [g_white] => 8
+                    [w_power] => 3
+                    [g_black] => 7
+                    [b_power] => 2
+                    [g_teai] => 2
+                    [g_result] => 1
+                    [g_winHow] => 3
+                    [g_winHow_moku] => 
+                    [user_id] => 7
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:23:07
+                    [id] => 8
+                    [id2] => 0
+                    [usersei] => 東島
+                    [username] => 信一郎
+                    [userseiname] => 東島信一郎
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => 
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 8
+                    [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+                    [userseiname2] => 大木輔
+                    [power_id] => 2
+                    [power_data] => 19級
+                    [power_id2] => 3
+                    [power_data2] => 18級
+                    [teai_id] => 2
+                    [teai_data] => 定先
+                    [komi] => 0
+                    [time_id] => 3
+                    [time_data] => 13:45
+                    [result_id] => 1
+                    [result_data] => ◯ ー ×
+                    [winHow_id] => 3
+                    [winHow_data] => 時間切れ
+                )
+
+            [9] => Array
+                (
+                    [g_id] => 13
+                    [g_year] => 2019
+                    [g_month] => 04
+                    [g_date] => 17
+                    [g_time] => 3
+                    [g_white] => 8
+                    [w_power] => 3
+                    [g_black] => 7
+                    [b_power] => 2
+                    [g_teai] => 2
+                    [g_result] => 1
+                    [g_winHow] => 3
+                    [g_winHow_moku] => 
+                    [user_id] => 7
+                    [delete_flg] => 0
+                    [create_date] => 2019-04-16 00:00:00
+                    [update_date] => 2019-04-16 02:23:07
+                    [id] => 8
+                    [id2] => 0
+                    [usersei] => 東島
+                    [username] => 信一郎
+                    [userseiname] => 東島信一郎
+                    [sex] => 1
+                    [m_id] => 
+                    [email] => 
+                    [pass] => 
+                    [groupname] => 1
+                    [power] => 8
+                    [pic] => uploads/b2437ab648a8732dbeb73d228f4185751010bca8.png
+                    [userseiname2] => 大木輔
+                    [power_id] => 2
+                    [power_data] => 19級
+                    [power_id2] => 3
+                    [power_data2] => 18級
+                    [teai_id] => 2
+                    [teai_data] => 定先
+                    [komi] => 0
+                    [time_id] => 3
+                    [time_data] => 13:45
+                    [result_id] => 1
+                    [result_data] => ◯ ー ×
+                    [winHow_id] => 3
+                    [winHow_data] => 時間切れ
+                )
+
+        )
+
+)
+
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：対局者情報を取得します。
+[01-May-2019 17:32:22 Asia/Tokyo] デバッグ：クエリ成功。

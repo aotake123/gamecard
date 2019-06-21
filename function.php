@@ -272,15 +272,15 @@ function getUser($u_id){
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-function getProduct($u_id, $p_id){
+function getProduct($u_id, $g_id){
     debug('対局情報を取得します');
-    debug('ユーザーID：'.u_id);
+    debug('ユーザーID：'.$u_id);
     debug('対局ID：'.$g_id);
     //例外処理
     try{
         //DB接続
         $dbh = dbConnect();
-        $sql = 'SELECT * FROM game WHERE id = :u_id AND g_id = :g_id AND delete_flg = 0';
+        $sql = 'SELECT * FROM game WHERE user_id = :u_id AND g_id = :g_id AND delete_flg = 0';
         $data = array(':u_id' => $u_id, 'g_id' => $g_id);
         //クエリ実行
         $stmt = queryPost($dbh, $sql, $data);

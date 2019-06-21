@@ -130,7 +130,7 @@ require('head.php');
         <div class="reco_wrap">
             <table class="record">
                 <thead><tr>
-                <th class="reco_item reco_date">日時</th>
+                <th class="reco_item reco_date2">日時</th>
                 <th class="reco_black">黒番</th>
                 <th class="reco_winlose">勝敗</th>
                 <th class="reco_white">白番</th>

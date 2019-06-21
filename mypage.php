@@ -109,18 +109,23 @@ require('head.php');
                 <th class="reco_white">白番</th>
                 <th class="reco_hand">手合</th>
                 <th class="reco_eff">結果</th>
+                <th class="reco_item"></th>
                 </tr>
                 
             <?php
                 foreach($gameData['data'] as $key => $val):
             ?>            
                 <tr>
-                <td class="reco_item"><?php echo $val['g_year']; ?>/<?php echo $val['g_month']; ?>/<?php echo $val['g_date']; ?> <?php echo $val['time_data']; ?></td>
+                <td class="reco_item"><?php echo $val['g_year']; ?>/<?php echo $val['g_month']; ?>/<?php echo $val['g_date']; ?></td>
                 <td class="reco_item"><?php echo $val['userseiname']; ?><?php echo $val['power_data']; ?></td>
                 <td class="reco_item"><?php echo $val['result_data']; ?></td>
                 <td class="reco_item"><?php echo $val['userseiname2']; ?><?php echo $val['power_data2']; ?></td>
                 <td class="reco_item"><?php echo $val['teai_data']; ?></td>
                 <td class="reco_item"><?php echo $val['g_winHow_moku'],$val['winHow_data']; ?>
+                <td class="reco_item reco_link">
+                <?php if($val['user_id'] === $_SESSION['user_id']){ ?>
+                    <a href="registProduct.php?g_id=<?php echo $val['g_id']; ?>">変更</a>
+                <?php } ?>
                 </td>
                 </tr>
             <?php

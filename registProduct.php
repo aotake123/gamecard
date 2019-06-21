@@ -25,12 +25,9 @@ $dbFormData = (!empty($g_id)) ? getProduct($_SESSION['user_id'], $g_id) : '';
 $edit_flg = (empty($dbFormData)) ? false : true;
 //DBから対局者（カテゴリ)データを取得
 $dbPlayerData = getPlayer();
-
-debug('対局ID：'.$g_id);
+//debug('対局ID：'.$g_id);
 debug('フォーム用DBデータ：'.print_r($dbFormData,true));
 debug('対局者データ：'.print_r($dbPlayerData,true));
-
-
 
 //パラメータ改ざんチェック
 //==============================
@@ -87,9 +84,9 @@ if(!empty($_POST)){
     }
     
     //白番対局者の参照元データを取得
-$whiteData = getWhiteName($g_white);
-$userseiname = $whiteData['userseiname'];
-debug('白番対局者日本語データ：'.print_r($whiteData,true));
+    $whiteData = getWhiteName($g_white);
+    $userseiname = $whiteData['userseiname'];
+    debug('白番対局者日本語データ：'.print_r($whiteData,true));
 
     
         //新規の場合はセレクトボックスの未選択の場合にバリデーションが
@@ -126,10 +123,10 @@ debug('白番対局者日本語データ：'.print_r($whiteData,true));
                     if($edit_flg){
                         debug('DB更新です。');
                         $sql = 'UPDATE game SET g_year = :g_year, g_month = :g_month, g_date = :g_date, g_time = :g_time, g_black = :g_black, b_power = :b_power,
-                            g_white = :g_white, w_power = :w_power, g_teai = :g_teai, g_winHow = :g_winHow, g_winHow_moku = :g_winHow_moku, g_result = :g_result, WHERE user_id = :user_id AND g_id = :g_id';
-                         $data = array(':g_year' => $g_year, ':g_month' => $g_month, ':g_date' => $g_date, ':g_time' => $g_time, ':g_black' => $black, ':b_power' => $b_power,
-                                     ':g_white' => $white, ':w_power' => $w_power, ':teai_id' => $teai_id, ':g_result' => $g_result,
-                                    ':user_id' => $_SESSION['user_id']);
+                            g_white = :g_white, w_power = :w_power, g_teai = :g_teai, g_winHow = :g_winHow, g_winHow_moku = :g_winHow_moku, g_result = :g_result WHERE user_id = :user_id AND g_id = :g_id';
+                         $data = array(':g_year' => $g_year, ':g_month' => $g_month, ':g_date' => $g_date, ':g_time' => $g_time, ':g_black' => $g_black, ':b_power' => $b_power,
+                                     ':g_white' => $g_white, ':w_power' => $w_power, ':g_teai' => $g_teai, ':g_winHow' => $g_winHow, ':g_winHow_moku' => $g_winHow_moku,':g_result' => $g_result,
+                                    ':user_id' => $_SESSION['user_id'], ':g_id' => $g_id);
                     }else{
                         debug('DB新規登録です。');
                         $sql = 'insert into game (g_year,g_month,g_date,g_time,g_black,b_power,g_white,w_power,g_teai,g_winHow,g_winHow_moku,g_result,create_date,user_id)
@@ -306,12 +303,12 @@ require('head.php');
                             <select name="g_black">
                                 <option value="0" <?php if(empty(getFormData('g_black'))) echo 'selected="selected"'; ?>>▶︎選択してください</option>
                                 <?php
-                                foreach($dbPlayerData as $key => $val){
+                                foreach($dbPlayerData as $key => $val):
                                 ?>
-                                <option value="<?php echo $val['id']?>" <?php if(getFormData($val['userseiname'])) echo 'selected="selected"'; ?>><?php echo $val['userseiname'] ?></option>
+                                <option value="<?php echo $val['id']?>" <?php if(getFormData('g_black') === $val['id']) echo 'selected="selected"'; ?>><?php echo $val['userseiname'] ?></option>
                                 <?php echo $val['userseiname']; ?>
                                 <?php
-                                }
+                                endforeach;
                                 ?>
                             </select>
                         </label>
@@ -363,7 +360,7 @@ require('head.php');
                                 <?php
                                 foreach($dbPlayerData as $key => $val){
                                 ?>
-                                <option value="<?php echo $val['id']?>" <?php if(getFormData($val['userseiname'])) echo 'selected="selected"'; ?>><?php echo $val['userseiname'] ?></option>
+                                <option value="<?php echo $val['id']; ?>" <?php if(getFormData('g_white') === $val['id']) echo 'selected="selected"'; ?>><?php echo $val['userseiname'] ?></option>
                                 <?php echo $val['userseiname']; ?>
                                 <?php
                                 }
@@ -445,17 +442,19 @@ require('head.php');
                         <label class="<?php if(!empty($err_msg['g_winHow'])) echo 'err'; ?>">
                             対局結果の詳細
                             <div class="form_radio">
-                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios" value="1">中押し</div>
+                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios" value="1"
+                                 <?php if(getFormData('g_winHow') == 1) echo 'checked="checked"'; ?>>中押し</div>
                                 <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios" value="2"
                                  <?php if(getFormData('g_winHow') == 2) echo 'checked="checked"'; ?>>目数差</div>
-                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios" value="3">時間切れ</div>
+                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios" value="3"
+                                 <?php if(getFormData('g_winHow') == 3) echo 'checked="checked"'; ?>>時間切れ</div>
                             </div>
                         </label>
 
                             
                         <label class="<?php if(!empty($err_msg['g_winHow_moku'])) echo 'err'; ?>">
                            目数差（半角数字で入力してください）
-                           <input type="text" name="g_winHow_moku" value="<?php echo getFormData('g_winHow_moku') ?>">
+                           <input type="text" name="g_winHow_moku" value="<?php echo getFormData('g_winHow_moku'); ?>">
                          </label>
                         <div class="area-msg">
                             <?php if(!empty($err_msg['g_winHow_moku'])) echo $err_msg['g_winHow_moku']; ?>

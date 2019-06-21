@@ -329,11 +329,17 @@ td.reco_item{
 }
 
 .reco_date{
-    width: 180px;
+    width: 140px;
+}
+.reco_date2{
+    width: 160px;
 }
 
 .reco_black,.reco_white{
     width: 150px;
+}
+.reco_link{
+    font-size: 13px;
 }
 
 

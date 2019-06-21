@@ -79,15 +79,13 @@ if(!empty($_POST)){
                     //EOTはEndOfFileの略。ABCでもなんでもいい。先頭の<<<の後の文字列と合わせること。最後のEOTの前後に空白など何も入れてはいけない
                     //EOT内の半角空白もすべてそのまま半角空白として扱われるのでインデントはしないこと
                     $comment = <<<EOT
-
 {$username}様
 
 パスワードが変更されました。
 
 ///////////////////////////////////////////
 対局カード GAMECARD 管理事務局
-URL http://webukatu.com/
-E-mail　info@webukatu.com
+E-mail　tasukuoki3@gmail.com
 ///////////////////////////////////////////
 EOT;
                     sendMail($from, $to, $subject, $comment);

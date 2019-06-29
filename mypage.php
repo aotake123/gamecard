@@ -79,14 +79,14 @@ require('head.php');
             <h2>あなたの個人成績</h2>
              <div class="main_prof">
                  <div class="main_prof_left">
-                    <img src="<?php echo $myPower[0]['pic']; ?>" alt="" class="mypage_img" style="<?php if(empty(getFormData('pic'))) echo 'display:none;' ?>">
+                    <img src="<?php echo sanitize($myPower[0]['pic']); ?>" alt="" class="mypage_img" style="<?php if(empty(getFormData('pic'))) echo 'display:none;' ?>">
 
-                    <img src="<?php echo $myPower[0]['pic']; ?>" alt="" height="150px" width="150px">
+                    <img src="<?php echo sanitize($myPower[0]['pic']); ?>" alt="" height="150px" width="150px">
                  </div>
                  <div class="main_prof_right">
-                    <p><?php echo $myPower[0]['userseiname']; ?></p>
-                    <p>現在の棋力：<?php echo $myPower[0]['power_data']; ?></p>
-                    <p>戦績： <?php echo $gameCount; ?>戦<?php echo $gameCountWin; ?>勝<?php echo $gameCountLose; ?>敗</p>
+                    <p><?php echo sanitize($myPower[0]['userseiname']); ?></p>
+                    <p>現在の棋力：<?php echo sanitize($myPower[0]['power_data']); ?></p>
+                    <p>戦績： <?php echo sanitize($gameCount); ?>戦<?php echo sanitize($gameCountWin); ?>勝<?php echo sanitize($gameCountLose); ?>敗</p>
                  </div>
              </div>
             <h2>あなたの対局結果一覧</h2>
@@ -116,15 +116,15 @@ require('head.php');
                 foreach($gameData['data'] as $key => $val):
             ?>            
                 <tr>
-                <td class="reco_item"><?php echo $val['g_year']; ?>/<?php echo $val['g_month']; ?>/<?php echo $val['g_date']; ?></td>
-                <td class="reco_item"><?php echo $val['userseiname']; ?><?php echo $val['power_data']; ?></td>
-                <td class="reco_item"><?php echo $val['result_data']; ?></td>
-                <td class="reco_item"><?php echo $val['userseiname2']; ?><?php echo $val['power_data2']; ?></td>
-                <td class="reco_item"><?php echo $val['teai_data']; ?></td>
-                <td class="reco_item"><?php echo $val['g_winHow_moku'],$val['winHow_data']; ?>
+                <td class="reco_item"><?php echo sanitize($val['g_year']); ?>/<?php echo sanitize($val['g_month']); ?>/<?php echo sanitize($val['g_date']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['userseiname']); ?><?php echo sanitize($val['power_data']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['result_data']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['userseiname2']); ?><?php echo sanitize($val['power_data2']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['teai_data']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['g_winHow_moku']),sanitize($val['winHow_data']); ?>
                 <td class="reco_item reco_link">
                 <?php if($val['user_id'] === $_SESSION['user_id']){ ?>
-                    <a href="registProduct.php?g_id=<?php echo $val['g_id']; ?>">変更</a>
+                    <a href="registProduct.php?g_id=<?php echo sanitize($val['g_id']); ?>">変更</a>
                 <?php } ?>
                 </td>
                 </tr>

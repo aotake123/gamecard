@@ -88,8 +88,8 @@ require('head.php');
                                 <?php
                                 foreach($dbPlayerData as $key => $val){
                                 ?>
-                                <option value="<?php echo $val['id']?>" <?php if(getFormData('p_id',true) == $val['id']){ echo 'selected="selected"'; } ?>><?php echo $val['userseiname'] ?></option>
-                                <?php echo $val['userseiname']; ?>
+                                <option value="<?php echo sanitize($val['id']);?>" <?php if(getFormData('p_id',true) == $val['id']){ echo 'selected="selected"'; } ?>><?php echo sanitize($val['userseiname']); ?></option>
+                                <?php echo sanitize($val['userseiname']); ?>
                                 <?php
                                 }
                                 ?>
@@ -102,8 +102,8 @@ require('head.php');
                                 <?php
                                 foreach($dbPlayerData as $key => $val){
                                 ?>
-                                <option value="<?php echo $val['id']?>" <?php if(getFormData('c_id',true) == $val['id']){ echo 'selected="selected"'; } ?>><?php echo $val['userseiname'] ?></option>
-                                <?php echo $val['userseiname']; ?>
+                                <option value="<?php echo sanitize($val['id']);?>" <?php if(getFormData('c_id',true) == $val['id']){ echo 'selected="selected"'; } ?>><?php echo sanitize($val['userseiname']); ?></option>
+                                <?php echo sanitize($val['userseiname']); ?>
                                 <?php
                                 }
                                 ?>
@@ -121,7 +121,7 @@ require('head.php');
                 <span class="total-num"><?php echo sanitize($dbProductData['total']); ?></span>件の対局履歴が見つかりました
             </div>
             <div class="search-right">
-                <span class="num"><?php echo $currentMinNum+1; ?></span> - <span class="num"><?php echo $currentMinNum+$listSpan; ?></span>件 / <span class="num"><?php echo sanitize($dbProductData['total']); ?></span>件中
+                <span class="num"><?php echo sanitize($currentMinNum)+1; ?></span> - <span class="num"><?php echo $currentMinNum+$listSpan; ?></span>件 / <span class="num"><?php echo sanitize($dbProductData['total']); ?></span>件中
             </div>
         </div>
         
@@ -142,12 +142,12 @@ require('head.php');
                 foreach($dbProductData['data'] as $key => $val):
             ?>            
                 <tr>
-                <td class="reco_item"><?php echo $val['g_year']; ?>/<?php echo $val['g_month']; ?>/<?php echo $val['g_date']; ?> <?php echo $val['time_data']; ?></td>
-                <td class="reco_item"><?php echo $val['userseiname']; ?><?php echo $val['power_data']; ?></td>
-                <td class="reco_item"><?php echo $val['result_data']; ?></td>
-                <td class="reco_item"><?php echo $val['userseiname2']; ?><?php echo $val['power_data2']; ?></td>
-                <td class="reco_item"><?php echo $val['teai_data']; ?></td>
-                <td class="reco_item"><?php echo $val['g_winHow_moku'],$val['winHow_data']; ?>
+                <td class="reco_item"><?php echo sanitize($val['g_year']); ?>/<?php echo sanitize($val['g_month']); ?>/<?php echo sanitize($val['g_date']); ?> <?php echo sanitize($val['time_data']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['userseiname']); ?><?php echo sanitize($val['power_data']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['result_data']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['userseiname2']); ?><?php echo sanitize($val['power_data2']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['teai_data']); ?></td>
+                <td class="reco_item"><?php echo sanitize($val['g_winHow_moku']),sanitize($val['winHow_data']); ?>
                 </td>
                 </tr>
             <?php

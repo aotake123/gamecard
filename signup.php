@@ -127,28 +127,28 @@ require('head.php');
                      <form action="" method="post" class="form">
   
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['common'])) echo $err_msg['common']; ?>
+                            <?php if(!empty($err_msg['common'])) echo sanitize($err_msg['common']); ?>
                         </div>
                         <label class="<?php if(!empty($err_msg['email'])) echo 'err'; ?>">
                             Email
-                            <input type="text" name="email" value="<?php if(!empty($_POST['email'])) echo $_POST['email'] ?>">
+                            <input type="text" name="email" value="<?php if(!empty($_POST['email'])) echo sanitize($_POST['email']); ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['email'])) echo $err_msg['email']; ?>
+                            <?php if(!empty($err_msg['email'])) echo sanitize($err_msg['email']); ?>
                         </div>
                         <label class="<?php if(!empty($err_msg['pass'])) echo 'err'; ?>">
                             パスワード
-                            <input type="password" name="pass" value="<?php if(!empty($_POST['pass'])) echo $_POST['pass'] ?>">
+                            <input type="password" name="pass" value="<?php if(!empty($_POST['pass'])) echo sanitize($_POST['pass']); ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['pass'])) echo $err_msg['pass']; ?>
+                            <?php if(!empty($err_msg['pass'])) echo sanitize($err_msg['pass']); ?>
                         </div>
                         <label class="<?php if(!empty($err_msg['pass_re'])) echo 'err'; ?>">
                             パスワード（再入力）
-                            <input type="password" name="pass_re" value="<?php if(!empty($_POST['pass_re'])) echo $_POST['pass_re'] ?>">
+                            <input type="password" name="pass_re" value="<?php if(!empty($_POST['pass_re'])) echo sanitize($_POST['pass_re']); ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['pass_re'])) echo $err_msg['pass_re']; ?>
+                            <?php if(!empty($err_msg['pass_re'])) echo sanitize($err_msg['pass_re']); ?>
                         </div>
                         <div class="btn-container">
                             <input type="submit" class="btn btn-mid" value="登録する">

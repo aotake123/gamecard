@@ -147,7 +147,7 @@ require('head.php');
                             <input type="password" name="pass_old" value="<?php echo getFormData('pass_old'); ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['pass_old'])) echo $err_msg['pass_old']; ?>
+                            <?php if(!empty($err_msg['pass_old'])) echo sanitize($err_msg['pass_old']); ?>
                         </div>
                         
                         <label class="<?php if(!empty($err_msg['pass_new'])) echo 'err'; ?>">
@@ -155,7 +155,7 @@ require('head.php');
                             <input type="password" name="pass_new" value="<?php echo getFormData('pass_new'); ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['pass_new'])) echo $err_msg['pass_new']; ?>
+                            <?php if(!empty($err_msg['pass_new'])) echo sanitize($err_msg['pass_new']); ?>
                         </div>
                         
                         <label class="<?php if(!empty($err_msg['pass_new_re'])) echo 'err'; ?>">
@@ -163,7 +163,7 @@ require('head.php');
                             <input type="password" name="pass_new_re" value="<?php echo getFormData('pass_new_re'); ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['pass_new_re'])) echo $err_msg['pass_new_re']; ?>
+                            <?php if(!empty($err_msg['pass_new_re'])) echo sanitize($err_msg['pass_new_re']); ?>
                         </div>
                          <div class="btn-container">
                             <input type="submit" class="btn btn-mid" value="変更する">

@@ -149,7 +149,7 @@ require('head.php');
                             <input type="text" name="token" value="<?php echo getFormData('token') ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['token'])) echo $err_msg['token']; ?>
+                            <?php if(!empty($err_msg['token'])) echo sanitize($err_msg['token']); ?>
                         </div>
                          <div class="btn-container">
                             <input type="submit" class="btn btn-mid" value="再発行する">

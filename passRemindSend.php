@@ -134,14 +134,14 @@ require('head.php');
                          <p>ご指定のメールアドレス宛にパスワード再発行用のURLと認証キーをお送り致します。</p>
   
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['common'])) echo $err_msg['common']; ?>
+                            <?php if(!empty($err_msg['common'])) echo sanitize($err_msg['common']); ?>
                         </div>
                         <label class="<?php if(!empty($err_msg['email'])) echo 'err'; ?>">
                             Email
-                            <input type="text" name="email" value="<?php if(!empty($_POST['email'])) echo $_POST['email'] ?>">
+                            <input type="text" name="email" value="<?php if(!empty($_POST['email'])) echo sanitize($_POST['email']); ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['email'])) echo $err_msg['email']; ?>
+                            <?php if(!empty($err_msg['email'])) echo sanitize($err_msg['email']); ?>
                         </div>
                         
                          <div class="btn-container">

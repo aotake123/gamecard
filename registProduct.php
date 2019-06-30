@@ -208,7 +208,7 @@ require('head.php');
                      <form action="" method="post" class="form" enctype="multipart/form-data" style="width:100%;box-sizing:border-box;">
   
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['common'])) echo $err_msg['common']; ?>
+                            <?php if(!empty($err_msg['common'])) echo sanitize($err_msg['common']); ?>
                         </div>
                         
                         <label class="<?php if(!empty($err_msg['g_year'])) echo 'err'; ?>">
@@ -231,7 +231,7 @@ require('head.php');
                             </select>
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['g_year'])) echo $err_msg['g_year']; ?>
+                            <?php if(!empty($err_msg['g_year'])) echo sanitize($err_msg['g_year']); ?>
                         </div>
                         
                         <label class="<?php if(!empty($err_msg['g_month'])) echo 'err'; ?>">
@@ -253,7 +253,7 @@ require('head.php');
                             </select>
                          </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['g_month'])) echo $err_msg['g_month']; ?>
+                            <?php if(!empty($err_msg['g_month'])) echo sanitize($err_msg['g_month']); ?>
                         </div>
                         
                         <label class="<?php if(!empty($err_msg['g_date'])) echo 'err'; ?>">
@@ -263,14 +263,14 @@ require('head.php');
                                 <?php
                                 for($i = 1; $i < 32; $i++){
                                 ?>
-                                    <option value="<?php echo $i; ?>" <?php if(getFormData('g_date') == $i) echo 'selected="selected"'; ?>><?php echo $i; ?></option>;
+                                    <option value="<?php echo sanitize($i); ?>" <?php if(getFormData('g_date') == $i) echo 'selected="selected"'; ?>><?php echo sanitize($i); ?></option>;
                                 <?php
                                 }
                                 ?>
                             </select>
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['g_time'])) echo $err_msg['g_date']; ?>
+                            <?php if(!empty($err_msg['g_time'])) echo sanitize($err_msg['g_date']); ?>
                         </div>
 
                        <label class="<?php if(!empty($err_msg['g_time'])) echo 'err'; ?>">
@@ -295,7 +295,7 @@ require('head.php');
                              </select>
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['g_time'])) echo $err_msg['g_time']; ?>
+                            <?php if(!empty($err_msg['g_time'])) echo sanitize($err_msg['g_time']); ?>
                         </div>
                        
                         <label class="<?php if(!empty($err_msg['g_black'])) echo 'err'; ?>">
@@ -305,15 +305,15 @@ require('head.php');
                                 <?php
                                 foreach($dbPlayerData as $key => $val):
                                 ?>
-                                <option value="<?php echo $val['id']?>" <?php if(getFormData('g_black') === $val['id']) echo 'selected="selected"'; ?>><?php echo $val['userseiname'] ?></option>
-                                <?php echo $val['userseiname']; ?>
+                                <option value="<?php echo sanitize($val['id']); ?>" <?php if(getFormData('g_black') === $val['id']) echo 'selected="selected"'; ?>><?php echo sanitize($val['userseiname']); ?></option>
+                                <?php echo sanitize($val['userseiname']); ?>
                                 <?php
                                 endforeach;
                                 ?>
                             </select>
                         </label>
                         <div class="username">
-                            <?php if(!empty($err_msg['g_black'])) echo $err_msg['g_black']; ?>
+                            <?php if(!empty($err_msg['g_black'])) echo sanitize($err_msg['g_black']); ?>
                         </div>
                         
                         <label class="<?php if(!empty($err_msg['b_power'])) echo 'err'; ?>">
@@ -349,7 +349,7 @@ require('head.php');
                                 <option value="27" <?php if(getFormData('b_power') == 27) echo 'selected="selected"'; ?>>七段</option>
                             </select>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['b_power'])) echo $err_msg['b_power']; ?>
+                            <?php if(!empty($err_msg['b_power'])) echo sanitize($err_msg['b_power']); ?>
                         </div>
                         
 
@@ -360,7 +360,7 @@ require('head.php');
                                 <?php
                                 foreach($dbPlayerData as $key => $val){
                                 ?>
-                                <option value="<?php echo $val['id']; ?>" <?php if(getFormData('g_white') === $val['id']) echo 'selected="selected"'; ?>><?php echo $val['userseiname'] ?></option>
+                                <option value="<?php echo sanitize($val['id']); ?>" <?php if(getFormData('g_white') === $val['id']) echo 'selected="selected"'; ?>><?php echo sanitize($val['userseiname']); ?></option>
                                 <?php echo $val['userseiname']; ?>
                                 <?php
                                 }
@@ -368,7 +368,7 @@ require('head.php');
                             </select>
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['g_white'])) echo $err_msg['g_white']; ?>
+                            <?php if(!empty($err_msg['g_white'])) echo sanitize($err_msg['g_white']); ?>
                         </div>
 
                         <label class="<?php if(!empty($err_msg['w_power'])) echo 'err'; ?>">
@@ -404,7 +404,7 @@ require('head.php');
                                 <option value="27" <?php if(getFormData('w_power') == 27) echo 'selected="selected"'; ?>>七段</option>
                             </select>                        </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['w_power'])) echo $err_msg['w_power']; ?>
+                            <?php if(!empty($err_msg['w_power'])) echo sanitize($err_msg['w_power']); ?>
                         </div>
                                                            
                         <label class="<?php if(!empty($err_msg['g_teai'])) echo 'err'; ?>">
@@ -424,7 +424,7 @@ require('head.php');
                             </select>
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['g_teai'])) echo $err_msg['g_teai']; ?>
+                            <?php if(!empty($err_msg['g_teai'])) echo sanitize($err_msg['g_teai']); ?>
                         </div>
                                              
                         <label class="<?php if(!empty($err_msg['g_result'])) echo 'err'; ?>">
@@ -436,7 +436,7 @@ require('head.php');
                              </select>
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['g_result'])) echo $err_msg['g_result']; ?>
+                            <?php if(!empty($err_msg['g_result'])) echo sanitize($err_msg['g_result']); ?>
                         </div>
                                               
                         <label class="<?php if(!empty($err_msg['g_winHow'])) echo 'err'; ?>">
@@ -457,7 +457,7 @@ require('head.php');
                            <input type="text" name="g_winHow_moku" value="<?php echo getFormData('g_winHow_moku'); ?>">
                          </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['g_winHow_moku'])) echo $err_msg['g_winHow_moku']; ?>
+                            <?php if(!empty($err_msg['g_winHow_moku'])) echo sanitize($err_msg['g_winHow_moku']); ?>
                         </div>             
                         
                          <div class="btn-container">

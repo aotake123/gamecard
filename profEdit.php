@@ -137,7 +137,7 @@ require('head.php');
                      <form action="" method="post" class="form" enctype="multipart/form-data">
   
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['common'])) echo $err_msg['common']; ?>
+                            <?php if(!empty($err_msg['common'])) echo sanitize($err_msg['common']); ?>
                         </div>
                         
                         <label class="<?php if(!empty($err_msg['email'])) echo 'err'; ?>">
@@ -145,7 +145,7 @@ require('head.php');
                             <input type="text" name="usersei" value="<?php echo getFormData('usersei'); ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['usersei'])) echo $err_msg['usersei']; ?>
+                            <?php if(!empty($err_msg['usersei'])) echo sanitize($err_msg['usersei']); ?>
                         </div>
                         
                         <label class="<?php if(!empty($err_msg['usersei'])) echo 'err'; ?>">
@@ -153,7 +153,7 @@ require('head.php');
                             <input type="text" name="username" value="<?php echo getFormData('username'); ?>">
                         </label>
                         <div class="username">
-                            <?php if(!empty($err_msg['username'])) echo $err_msg['username']; ?>
+                            <?php if(!empty($err_msg['username'])) echo sanitize($err_msg['username']); ?>
                         </div>
                         
                         <label class="<?php if(!empty($err_msg['sex'])) echo 'err'; ?>">
@@ -166,7 +166,7 @@ require('head.php');
                             
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['sex'])) echo $err_msg['sex']; ?>
+                            <?php if(!empty($err_msg['sex'])) echo sanitize($err_msg['sex']); ?>
                         </div>
                         
 
@@ -179,7 +179,7 @@ require('head.php');
                             
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['m_id'])) echo $err_msg['m_id']; ?>
+                            <?php if(!empty($err_msg['m_id'])) echo sanitize($err_msg['m_id']); ?>
                         </div>
 
                         <label class="<?php if(!empty($err_msg['power'])) echo 'err'; ?>">
@@ -216,7 +216,7 @@ require('head.php');
                             </select>
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['power'])) echo $err_msg['power']; ?>
+                            <?php if(!empty($err_msg['power'])) echo sanitize($err_msg['power']); ?>
                         </div>
                                                            
                         <label class="<?php if(!empty($err_msg['email'])) echo 'err'; ?>">
@@ -224,7 +224,7 @@ require('head.php');
                             <input type="text" name="email" value="<?php echo getFormData('email'); ?>">
                         </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['email'])) echo $err_msg['email']; ?>
+                            <?php if(!empty($err_msg['email'])) echo sanitize($err_msg['email']); ?>
                         </div>
                              プロフィール画像                                             
                         <label class="area-drop <?php if(!empty($err_msg['pic'])) echo 'err'; ?>" style="height:370px;line-height:370px;">
@@ -233,7 +233,7 @@ require('head.php');
                             <img src="<?php echo getFormData('pic'); ?>" alt="" class="prev-img" style="<?php if(empty(getFormData('pic'))) echo 'display:none;' ?>">
                          </label>
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['pic'])) echo $err_msg['pic']; ?>
+                            <?php if(!empty($err_msg['pic'])) echo sanitize($err_msg['pic']); ?>
                         </div>
                         
                          <div class="btn-container">

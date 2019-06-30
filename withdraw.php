@@ -92,7 +92,7 @@ require('head.php');
                      <form action="" method="post" class="form">
   
                         <div class="area-msg">
-                            <?php if(!empty($err_msg['common'])) echo $err_msg['common']; ?>
+                            <?php if(!empty($err_msg['common'])) echo sanitize($err_msg['common']); ?>
                         </div>
                        <div class="btn-container">
                             <input type="submit" class="btn btn-mid" value="退会する" name="submit">

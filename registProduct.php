@@ -292,6 +292,7 @@ require('head.php');
                                 <option value="13" <?php if(getFormData('g_time') == 13) echo 'selected="selected"'; ?>>16:30</option>
                                 <option value="14" <?php if(getFormData('g_time') == 14) echo 'selected="selected"'; ?>>16:45</option>
                                 <option value="15" <?php if(getFormData('g_time') == 15) echo 'selected="selected"'; ?>>16:30</option>
+                                <option value="16" <?php if(getFormData('g_time') == 16) echo 'selected="selected"'; ?>>その他</option>
                              </select>
                         </label>
                         <div class="area-msg">
@@ -442,11 +443,11 @@ require('head.php');
                         <label class="<?php if(!empty($err_msg['g_winHow'])) echo 'err'; ?>">
                             対局結果の詳細
                             <div class="form_radio">
-                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios" value="1"
+                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios js-radio-reset" value="1"
                                  <?php if(getFormData('g_winHow') == 1) echo 'checked="checked"'; ?>>中押し</div>
-                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios" value="2"
+                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios  js-radio-validate" value="2"
                                  <?php if(getFormData('g_winHow') == 2) echo 'checked="checked"'; ?>>目数差</div>
-                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios" value="3"
+                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios js-radio-reset" value="3"
                                  <?php if(getFormData('g_winHow') == 3) echo 'checked="checked"'; ?>>時間切れ</div>
                             </div>
                         </label>
@@ -454,7 +455,7 @@ require('head.php');
                             
                         <label class="<?php if(!empty($err_msg['g_winHow_moku'])) echo 'err'; ?>">
                            目数差（半角数字で入力してください）
-                           <input type="text" name="g_winHow_moku" value="<?php echo getFormData('g_winHow_moku'); ?>">
+                           <input class="js-disabled-form" type="text" name="g_winHow_moku" value="<?php echo getFormData('g_winHow_moku'); ?>" disabled="disabled">
                          </label>
                         <div class="area-msg">
                             <?php if(!empty($err_msg['g_winHow_moku'])) echo sanitize($err_msg['g_winHow_moku']); ?>

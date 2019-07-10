@@ -71,6 +71,7 @@ define('MSG16','有効期限が切れています');
 define('MSG17','半角英数字のみご使用頂けます。');
 define('MSG18','黒番と白番のどちらにもあなたが含まれていません');
 define('MSG19','黒番と白番に同一のプレイヤーが入力されています');
+define('MSG20','目数は半角数字、半目は0.5目で入力してください');
 define('SUC01','パスワードを変更しました');
 define('SUC02','プロフィールを変更しました');
 define('SUC03','メールを送信しました');
@@ -143,6 +144,14 @@ function validNumber($str,$key){
     if(!preg_match("/^[0-9]+$/", $str)){
         global $err_msg;
         $err_msg[$key] = MSG15;
+    }
+}
+
+//少数チェック
+function validHanmoku($str,$key){
+    if(!preg_match("/^[1-9]\d*|0)\.(\d+)?$/", $str)){
+        global $err_msg;
+        $err_msg[$key] = MSG20;
     }
 }
 

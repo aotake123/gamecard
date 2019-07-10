@@ -86,7 +86,7 @@ if(!empty($_POST)){
     //白番対局者の参照元データを取得
     $whiteData = getWhiteName($g_white);
     $userseiname = $whiteData['userseiname'];
-    debug('白番対局者日本語データ：'.print_r($whiteData,true));
+    //debug('白番対局者日本語データ：'.print_r($whiteData,true));
 
     
         //新規の場合はセレクトボックスの未選択の場合にバリデーションが
@@ -95,18 +95,35 @@ if(!empty($_POST)){
             validSelect($g_year, 'g_year');
             validSelect($g_month, 'g_month');
             validSelect($g_date, 'g_date');
-            //validSelect($g_black, 'g_black');
+            validSelect($g_black, 'g_black');
             validSelect($b_power, 'b_power');
-            //validSelect($g_white, 'g_white');
+            validSelect($g_white, 'g_white');
             validSelect($w_power, 'w_power');
-            //validSelect($g_teai, 'g_teai');
-            //validSelect($g_winHow, 'g_winHow');
-            //validSelect($g_result, 'g_result');
+            validSelect($g_teai, 'g_teai');
+            validSelect($g_winHow, 'g_winHow');
+            validSelect($g_result, 'g_result');
+
+            if(empty($err_msg)){
+                //少数確認
+                validHanmoku($g_winHow_moku,'g_winHow_moku');
+            }
         }
 
         //更新の場合はDBの情報と入力情報が異なる場合にバリデーションを行う
         if(isset($dbFormData)){
-            
+            //少数確認
+            validHanmoku($g_winHow_moku,'g_winHow_moku');
+            //セレクトボックスチェック
+            validSelect($g_year, 'g_year');
+            validSelect($g_month, 'g_month');
+            validSelect($g_date, 'g_date');
+            validSelect($g_black, 'g_black');
+            validSelect($b_power, 'b_power');
+            validSelect($g_white, 'g_white');
+            validSelect($w_power, 'w_power');
+            validSelect($g_teai, 'g_teai');
+            validSelect($g_winHow, 'g_winHow');
+            validSelect($g_result, 'g_result');
         }
 
             if(empty($err_msg)){
@@ -455,7 +472,7 @@ require('head.php');
                             
                         <label class="<?php if(!empty($err_msg['g_winHow_moku'])) echo 'err'; ?>">
                            目数差（半角数字で入力してください）
-                           <input class="js-disabled-form" type="text" name="g_winHow_moku" value="<?php echo getFormData('g_winHow_moku'); ?>" disabled="disabled">
+                           <input class="js-disabled-form" type="text" name="g_winHow_moku" value="<?php echo getFormData('g_winHow_moku'); ?>" disabled="<?php if(!empty(getFormData)){ echo ""; }else{ echo "disabled"; }  ?>">
                          </label>
                         <div class="area-msg">
                             <?php if(!empty($err_msg['g_winHow_moku'])) echo sanitize($err_msg['g_winHow_moku']); ?>

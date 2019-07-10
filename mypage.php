@@ -114,14 +114,28 @@ require('head.php');
                 
             <?php
                 foreach($gameData['data'] as $key => $val):
-            ?>            
+            ?>
                 <tr>
                 <td class="reco_item"><?php echo sanitize($val['g_year']); ?>/<?php echo sanitize($val['g_month']); ?>/<?php echo sanitize($val['g_date']); ?></td>
                 <td class="reco_item"><?php echo sanitize($val['userseiname']); ?><?php echo sanitize($val['power_data']); ?></td>
                 <td class="reco_item"><?php echo sanitize($val['result_data']); ?></td>
                 <td class="reco_item"><?php echo sanitize($val['userseiname2']); ?><?php echo sanitize($val['power_data2']); ?></td>
                 <td class="reco_item"><?php echo sanitize($val['teai_data']); ?></td>
-                <td class="reco_item"><?php echo sanitize($val['g_winHow_moku']),sanitize($val['winHow_data']); ?>
+                <td class="reco_item">
+                    <?php
+                    if(!empty($val['g_winHow_moku'])){
+                            (string)$g_winHow_moku = $val['g_winHow_moku'];
+                            $g_winHow_moku = str_replace('0.5','半',$g_winHow_moku);
+                            if(strpos($g_winHow_moku,'.5') !== false){
+                                $g_winHow_moku = str_replace('.5','目半差',$g_winHow_moku);
+                                $val['winHow_data'] = "";
+                            }
+                            $replace = str_replace('.0',"",$g_winHow_moku);
+                    }else{
+                        $replace = "";
+                    }
+                    ?>
+                <?php echo sanitize($replace),sanitize($val['winHow_data']); ?>
                 <td class="reco_item reco_link">
                 <?php if($val['user_id'] === $_SESSION['user_id']){ ?>
                     <a href="registProduct.php?g_id=<?php echo sanitize($val['g_id']); ?>">変更</a>

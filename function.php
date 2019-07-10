@@ -147,9 +147,9 @@ function validNumber($str,$key){
     }
 }
 
-//少数チェック
+//小数チェック
 function validHanmoku($str,$key){
-    if(!preg_match("/^[1-9]\d*|0)\.(\d+)?$/", $str)){
+    if(!preg_match('/^(0|-?[1-9][0-9]*|-?0\.[1-9][0-9]*|-?0\.[0-9]+[1-9][0-9]*|-?[1-9][0-9]*\.[0-9]+|0\.[0]+)$/u', $str)){
         global $err_msg;
         $err_msg[$key] = MSG20;
     }

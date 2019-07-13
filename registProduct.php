@@ -20,14 +20,18 @@ require('auth.php');
 //GETデータを格納
 $g_id = (!empty($_GET['g_id'])) ? $_GET['g_id'] : '';
 //DBから商品データを取得
-$dbFormData = (!empty($g_id)) ? getProduct($_SESSION['user_id'], $g_id) : '';
+if($_SESSION['user_id'] == 17){
+    $dbFormData = (!empty($g_id)) ? getProduct_master($g_id) : '';
+}else{
+    $dbFormData = (!empty($g_id)) ? getProduct($_SESSION['user_id'], $g_id) : '';
+}
 //新規登録画面か編集画面か判別用フラグ
 $edit_flg = (empty($dbFormData)) ? false : true;
 //DBから対局者（カテゴリ)データを取得
 $dbPlayerData = getPlayer();
 //debug('対局ID：'.$g_id);
-debug('フォーム用DBデータ：'.print_r($dbFormData,true));
-debug('対局者データ：'.print_r($dbPlayerData,true));
+//debug('フォーム用DBデータ：'.print_r($dbFormData,true));
+//debug('対局者データ：'.print_r($dbPlayerData,true));
 
 //パラメータ改ざんチェック
 //==============================
@@ -72,11 +76,15 @@ if(!empty($_POST)){
     }
     //対局勝敗
     $g_result = $_POST['g_result'];
-    //更新と新規関係無く、自分が黒番にも白番にも含まれていない対局に対してエラーを出す
-    if($g_black !== $_SESSION['user_id'] && $g_white !== $_SESSION['user_id']){
-        global $err_msg;
-        $err_msg['common'] = MSG18;
+
+    if($_SESSION['user_id'] != 17){
+        //更新と新規関係無く、自分が黒番にも白番にも含まれていない対局に対してエラーを出す
+        if($g_black !== $_SESSION['user_id'] && $g_white !== $_SESSION['user_id']){
+            global $err_msg;
+            $err_msg['common'] = MSG18;
+        }
     }
+
     //黒番と白番が同一人物の場合にエラーを出す
     if($g_black === $g_white){
         global $err_msg;
@@ -103,7 +111,7 @@ if(!empty($_POST)){
             validSelect($g_winHow, 'g_winHow');
             validSelect($g_result, 'g_result');
 
-            if(empty($err_msg)){
+            if(!empty($g_winHow_moku) ){
                 //少数確認
                 validHanmoku($g_winHow_moku,'g_winHow_moku');
             }
@@ -111,8 +119,11 @@ if(!empty($_POST)){
 
         //更新の場合はDBの情報と入力情報が異なる場合にバリデーションを行う
         if(isset($dbFormData)){
-            //少数確認
-            validHanmoku($g_winHow_moku,'g_winHow_moku');
+            //更に、POST通信をされた結果入力値がある場合に小数点確認
+            if(empty($err_msg) && !empty($g_winHow_moku) ){
+                //少数確認
+                validHanmoku($g_winHow_moku,'g_winHow_moku');
+            }
             //セレクトボックスチェック
             validSelect($g_year, 'g_year');
             validSelect($g_month, 'g_month');
@@ -140,10 +151,10 @@ if(!empty($_POST)){
                     if($edit_flg){
                         debug('DB更新です。');
                         $sql = 'UPDATE game SET g_year = :g_year, g_month = :g_month, g_date = :g_date, g_time = :g_time, g_black = :g_black, b_power = :b_power,
-                            g_white = :g_white, w_power = :w_power, g_teai = :g_teai, g_winHow = :g_winHow, g_winHow_moku = :g_winHow_moku, g_result = :g_result WHERE user_id = :user_id AND g_id = :g_id';
+                            g_white = :g_white, w_power = :w_power, g_teai = :g_teai, g_winHow = :g_winHow, g_winHow_moku = :g_winHow_moku, g_result = :g_result WHERE g_id = :g_id';
                          $data = array(':g_year' => $g_year, ':g_month' => $g_month, ':g_date' => $g_date, ':g_time' => $g_time, ':g_black' => $g_black, ':b_power' => $b_power,
                                      ':g_white' => $g_white, ':w_power' => $w_power, ':g_teai' => $g_teai, ':g_winHow' => $g_winHow, ':g_winHow_moku' => $g_winHow_moku,':g_result' => $g_result,
-                                    ':user_id' => $_SESSION['user_id'], ':g_id' => $g_id);
+                                    ':g_id' => $g_id);
                     }else{
                         debug('DB新規登録です。');
                         $sql = 'insert into game (g_year,g_month,g_date,g_time,g_black,b_power,g_white,w_power,g_teai,g_winHow,g_winHow_moku,g_result,create_date,user_id)
@@ -464,15 +475,17 @@ require('head.php');
                                  <?php if(getFormData('g_winHow') == 1) echo 'checked="checked"'; ?>>中押し</div>
                                 <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios  js-radio-validate" value="2"
                                  <?php if(getFormData('g_winHow') == 2) echo 'checked="checked"'; ?>>目数差</div>
-                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios js-radio-reset" value="3"
-                                 <?php if(getFormData('g_winHow') == 3) echo 'checked="checked"'; ?>>時間切れ</div>
+                                 <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios js-radio-reset" value="3"
+                                 <?php if(getFormData('g_winHow') == 3) echo 'checked="checked"'; ?>>持碁</div>
+                                <div class="form_radio_item"><input type="radio" name="g_winHow" class="option_radios js-radio-reset" value="4"
+                                 <?php if(getFormData('g_winHow') == 4) echo 'checked="checked"'; ?>>時間切れ</div>
                             </div>
                         </label>
 
                             
                         <label class="<?php if(!empty($err_msg['g_winHow_moku'])) echo 'err'; ?>">
                            目数差（半角数字で入力してください）
-                           <input class="js-disabled-form" type="text" name="g_winHow_moku" value="<?php echo getFormData('g_winHow_moku'); ?>" disabled="<?php if(!empty(getFormData)){ echo ""; }else{ echo "disabled"; }  ?>">
+                           <input class="js-disabled-form" type="text" name="g_winHow_moku" value="<?php echo getFormData('g_winHow_moku'); ?>" disabled="<?php if(!empty(getFormData('g_winHow_moku'))){ echo ""; }else{ echo "disabled"; }  ?>">
                          </label>
                         <div class="area-msg">
                             <?php if(!empty($err_msg['g_winHow_moku'])) echo sanitize($err_msg['g_winHow_moku']); ?>

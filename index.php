@@ -40,6 +40,8 @@ $dbPlayerData = getPlayer();
 $dbFormData = (!empty($g_id)) ? getProduct($_SESSION['user_id'], $g_id) : '';
 
 
+
+
 // ページネーション関連
 //================================
 //表示件数
@@ -114,7 +116,7 @@ require('head.php');
        </section>
        
         <section id="main">
-            <h2>全対局結果の一覧</h2>
+            <h2>全対局者の結果一覧</h2>
         
         <div class="search-title">
             <div class="search-left">

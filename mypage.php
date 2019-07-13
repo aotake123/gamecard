@@ -29,7 +29,6 @@ $gameCountLose = $gameCount - $gameCountWin;
 $myPower = getMyPower($u_id);
     debug('棋力データ：'.print_r($myPower,true));
 
-
 //パラメータ改ざんチェック
 //==============================
 //GETパラメータはあるが、改ざんされている（URLをいじくった）場合、正しい対局データが取れないのでマイページへ遷移させる
@@ -41,7 +40,7 @@ $myPower = getMyPower($u_id);
 //ページネーション機構
 //==============================
 //表示件数
-$listSpan = 10;
+$listSpan = 20;
 // カレントページのGETパラメータを取得
 $currentPageNum = (!empty($_GET['p'])) ? $_GET['p'] : 1; //デフォルトは１ページめ
 //現在の表示レコード先頭を算出
@@ -53,6 +52,10 @@ $gameData = getMyGameList($currentMinNum,$listSpan,$u_id);
 //$dbProductData = getMyGame($currentMinNum,$listSpan,$sort);
 //DBから対局者データを取得
 $dbPlasyerData = getPlayer();
+
+//管理者ログイン時用のテーブルデータ取得
+//DBから対局データを取得(件数や中身の情報取得)
+$dbProductData = getProductList($currentMinNum,$player = "");
 
 
 ?>
@@ -76,6 +79,9 @@ require('head.php');
     <!-- main contents -->
     <div id="contents" class="site-width">
         <section id="main">
+            <?php
+            if($_SESSION['user_id'] != 17){
+            ?>
             <h2>あなたの個人成績</h2>
              <div class="main_prof">
                  <div class="main_prof_left">
@@ -89,14 +95,18 @@ require('head.php');
                     <p>戦績： <?php echo sanitize($gameCount); ?>戦<?php echo sanitize($gameCountWin); ?>勝<?php echo sanitize($gameCountLose); ?>敗</p>
                  </div>
              </div>
-            <h2>あなたの対局結果一覧</h2>
+            <?php
+            }
+            ?>
+
+            <h2><?php if($_SESSION['user_id'] == 17){ echo "IGOAMIGO"; }else{ echo "あなた"; } ?>の対局結果一覧</h2>
             
             <div class="search-title">
                 <div class="search-left">
-                    <span class="total-num"><?php echo sanitize($gameData['total']); ?></span>件の対局履歴が見つかりました
+                    <span class="total-num"><?php if($_SESSION['user_id'] == 17){ echo sanitize($dbProductData['total']); }else{ echo sanitize($gameData['total']); } ?></span>件の対局履歴が見つかりました
                 </div>
                 <div class="search-right">
-                    <span class="num"><?php echo $currentMinNum+1; ?></span> - <span class="num"><?php echo $currentMinNum+$listSpan; ?></span>件 / <span class="num"><?php echo sanitize($gameData['total']); ?></span>件中
+                    <span class="num"><?php echo $currentMinNum+1; ?></span> - <span class="num"><?php echo $currentMinNum+$listSpan; ?></span>件 / <span class="num"><?php if($_SESSION['user_id'] == 17){ echo sanitize($dbProductData['total']); }else{ echo sanitize($gameData['total']); } ?></span>件中
                 </div>
             </div>
             
@@ -113,7 +123,12 @@ require('head.php');
                 </tr>
                 
             <?php
-                foreach($gameData['data'] as $key => $val):
+                if($_SESSION['user_id'] == 17){
+                    $database = $dbProductData['data'];
+                }else{
+                    $database = $gameData['data'];
+                }
+                foreach($database as $key => $val):
             ?>
                 <tr>
                 <td class="reco_item"><?php echo sanitize($val['g_year']); ?>/<?php echo sanitize($val['g_month']); ?>/<?php echo sanitize($val['g_date']); ?></td>
@@ -137,7 +152,7 @@ require('head.php');
                     ?>
                 <?php echo sanitize($replace),sanitize($val['winHow_data']); ?>
                 <td class="reco_item reco_link">
-                <?php if($val['user_id'] === $_SESSION['user_id']){ ?>
+                <?php if($val['user_id'] === $_SESSION['user_id'] || $_SESSION['user_id'] == 17){ ?>
                     <a href="registProduct.php?g_id=<?php echo sanitize($val['g_id']); ?>">変更</a>
                 <?php } ?>
                 </td>
@@ -152,8 +167,13 @@ require('head.php');
         <div class="pagination">
             <ul class="pagination-list">
             
-     <?php pagination($currentPageNum, $gameData['total_page']); ?>
-  
+        <?php
+        if($_SESSION['user_id'] == 17){
+         pagination($currentPageNum,sanitize($dbProductData['total_page']));
+         }else{ 
+         pagination($currentPageNum,sanitize($gameData['total_page']));
+        }
+        ?>
             </ul>
         </div>
 

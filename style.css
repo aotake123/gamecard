@@ -548,6 +548,10 @@ input[type="submit"]:hover {
   padding: 0 0 15px 0;
   color: red;
 }
+.area-msg{
+  padding: 0 0 15px 0;
+  color: red;
+}
 
 .form .btn-container {
   overflow: hidden;

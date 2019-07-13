@@ -304,6 +304,30 @@ function getProduct($u_id, $g_id){
         error_log('エラー発生：' . $e->getMessage());
     }
 }
+
+function getProduct_master($g_id){
+    debug('対局情報を取得します');
+    debug('対局ID：'.$g_id);
+    //例外処理
+    try{
+        //DB接続
+        $dbh = dbConnect();
+        $sql = 'SELECT * FROM game WHERE g_id = :g_id AND delete_flg = 0';
+        $data = array('g_id' => $g_id);
+        //クエリ実行
+        $stmt = queryPost($dbh, $sql, $data);
+        
+        if($stmt){
+            //クエリ結果のデータを1レコード返却
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }else{
+            return false;
+        }
+    } catch (Exception $e){
+        error_log('エラー発生：' . $e->getMessage());
+    }
+}
+
 function getPlayer(){
     debug('対局者情報を取得します。');
     //例外処理

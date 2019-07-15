@@ -77,7 +77,7 @@ if(!empty($_POST)){
 本メールアドレス宛にパスワード再発行を致しました。
 下記のURLにて再発行パスワードをご入力頂き、ログインください。
 
-ログインページ：http://localhost:8888/gamecard/login.php
+ログインページ：http://ikizama-design.com/gamecard/login.php
 再発行パスワード：{$pass}
 ※ログイン後、パスワードの変更をお願いします
 

@@ -4,9 +4,9 @@
 //==============================
 
 //ログを取るかどうか
-ini_set('log_error','on');
+//ini_set('log_error','on');
 //ログの出力ファイルを指定
-ini_set('error_log','php.log');
+//ini_set('error_log','php.log');
 
 //==============================
 //デバッグ

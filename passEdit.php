@@ -72,7 +72,7 @@ if(!empty($_POST)){
                     $_SESSION['msg_success'] = SUC01;
                     
                     //メールを送信
-                    $username = ($userData['username']) ? $userData['username'] : '名無し';
+                    $username = ($userData['usersei']) ? $userData['usersei'] : '名無し';
                     $from = 'tasukuoki3@gmail.com';
                     $to = $userData['email'];
                     $subject = 'パスワード変更通知 | 対局カード GAMECARD';

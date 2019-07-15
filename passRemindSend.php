@@ -66,12 +66,12 @@ if(!empty($_POST)){
 本メールアドレス宛にパスワード再発行のご依頼がありました。
 下記のURLにて認証キーをご入力頂くとパスワードが再発行されます。
 
-パスワード再発行認証キー入力ページ：http://localhost:8888/gamecard/passRemindRecieve.php
+パスワード再発行認証キー入力ページ：http://ikizama-design.com/gamecard/passRemindRecieve.php
 認証キー：{$auth_key}
 ※認証キーの有効期限は30分となります
 
 認証キーを再発行されたい場合は下記ページより再度再発行をお願い致します。
-http://localhost:8888/gamecard/passRemindSend.php
+http://ikizama-design.com/gamecard/passRemindSend.php
 
 ///////////////////////////////////////////
 対局カード GAMECARD 管理事務局
